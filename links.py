@@ -7,9 +7,7 @@ from flask import Flask, request
 from waitress import serve
 from flask_cors import CORS
 
-from node import Node
-
-from tree import APIException, TreeClass
+from tree import APIException, TreeClass, Node
 
 indexhtml = """<h1 style="color: #5e9ca0;">AMAZING COMPANY</h1>
 <h2 style="color: #2e6c80;">API DEFINITION:&nbsp; url/v197tradeshift/xxxx</h2>
