@@ -332,13 +332,16 @@ def webdebug():
 def is_string_ok(s):
     """ return boolean true if no special characters """
     regex = re.compile(r'[@_!#$%^&*()<>?/\|}{~:]')
-    return (regex.search(s) is None)
+    if (regex.search(s)):
+        raise APIException("Illegal characters in input.")
 
 
 @app.route('/v197tradeshift/add/<s_node>/<s_id>', methods=['GET', 'POST'])
 def add_node(s_node, s_id):
     global mytree
     # input sanity
+    is_string_ok(s_node)
+    is_string_ok(s_id)
     if request.method == 'GET':
         raise APIException("/v197tradeshift/add... does not allow GET. Please use POST.", 405)
     if mytree.key_exists(s_id):
@@ -353,6 +356,7 @@ def add_node(s_node, s_id):
 @app.route('/v197tradeshift/<nodeid>', methods=['GET'])
 def mainget(nodeid):
     global mytree
+    is_string_ok(nodeid)
     node = mytree.findby_id(nodeid)
     if node is None:
         raise APIException(f"{nodeid} does not exist")
@@ -363,6 +367,7 @@ def mainget(nodeid):
 @app.route('/v197tradeshift/details/<nodeid>', methods=['GET'])
 def getdetails(nodeid):
     global mytree
+    is_string_ok(nodeid)
     node = mytree.findby_id(nodeid)
     if node is None:
         raise APIException(f"{nodeid} does not exist")
@@ -378,6 +383,8 @@ def getdetails(nodeid):
 def moveto(destid, nodeid):
     """ move the node to reparent to dest """
     global mytree
+    is_string_ok(destid)
+    is_string_ok(nodeid)
     mytree.move_by_id(destid, nodeid)
     # not specified in spec but will return the new data for destination
     rv = getdetails(destid)
