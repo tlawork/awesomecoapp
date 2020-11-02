@@ -73,7 +73,8 @@ I used a predominance of GET operations to make it easy to demo.
 ## SECURITY
 This is not a secure API so adding authentication would be a production step.  I used simple obfuscation in the URL to keep it safe 
 
-
+## MORE TESTING
+I did not have time to do a stress test on this - it could be that when creating thousands of nodes that something would go wrong. I spent many hours on this getting this project to this point. Hopefully a scaling test can be considered the next follow-on work to do if this were a real Awesome Company.
 
 # MY NOTES FOR REFERENCE
 
